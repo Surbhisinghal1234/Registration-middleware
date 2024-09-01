@@ -5,10 +5,12 @@ dotenv.config()
 import userRoutes from "./routes/userRoutes.js";
 import { ipLogger } from "./middleware/ipLogger.js";
 import { dateLogger } from "./middleware/dateLogger.js";
-
+import cors from "cors"
 const app = express();
 
+
 app.use(express.json());
+app.use(cors({ origin: "*",  }));
 app.use(ipLogger);
 app.use(dateLogger);
 
