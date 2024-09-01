@@ -1,14 +1,22 @@
 import express from "express";
-import userRoutes from "./routes/userRoutes.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv"
 dotenv.config()
+import userRoutes from "./routes/userRoutes.js";
+import { ipLogger } from "./middleware/ipLogger.js";
+import { dateLogger } from "./middleware/dateLogger.js";
 
 const app = express();
 
 app.use(express.json());
+app.use(ipLogger);
+app.use(dateLogger);
 
 //  routes
+app.get("/", (req, res) => {
+  res.send("Home Page");
+  console.log("home page")
+});
 app.use('/api', userRoutes);
 
 // connection 
